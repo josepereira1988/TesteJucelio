@@ -1,0 +1,70 @@
+﻿@model List<Funcionario>
+@{
+    ViewData["Title"] = "Lista de Pais";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lista de Paises</title>
+</head>
+<div><a class="btn btn-primary" role="button" aria-pressed="true" asp-action="Adicionar">Novo</a> </div>
+</BR>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Nome
+            </th>
+            <th>
+                DataNascimento
+            </th>
+            <th>
+                Salario
+            </th>
+            <th>
+               Genero
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salario)
+            </td>
+            <td>
+                @if (item.GeneroID == 1)
+                {
+
+
+                    <p>Marculino</p>
+                }
+                else
+                {
+                    <p>Feminino</p>
+                }
+
+            </td>
+            <td>
+                <a class="btn btn-primary" role="button" aria-pressed="true" asp-action="Atualizar" asp-route-id="@item.ID">Edit</a> |                
+                <a class="btn btn-primary" role="button" aria-pressed="true" asp-action="Deletar" asp-route-id="@item.ID">Deletar</a>
+            </td>
+        </tr>
+        }
+    </tbody>

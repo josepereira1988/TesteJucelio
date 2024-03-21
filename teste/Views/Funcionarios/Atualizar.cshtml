@@ -1,0 +1,103 @@
+﻿@model FuncionarioViewModel
+
+@{
+    ViewData["Title"] = "Funcionario Atulizar";
+}
+
+<!DOCTYPE html>
+
+<html>
+<body>
+
+    <h4>Atualizar usuario</h4>
+    <a class="btn btn-primary" role="button" aria-pressed="true" asp-action="AdicionarDependente" asp-route-id="@Model.funcionario.ID">+ Dependente</a>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Atualizar">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="text" asp-for="funcionario.ID" class="form-control" hidden />
+                <div class="form-group">
+                    <label asp-for="funcionario.Nome" class="control-label"></label>
+                    <input type="text" asp-for="funcionario.Nome" class="form-control" />
+                    <span asp-validation-for="funcionario.Nome" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="funcionario.DataNascimento" class="control-label"></label>
+                    <input asp-for="funcionario.DataNascimento" class="form-control" />
+                    <span asp-validation-for="funcionario.DataNascimento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="funcionario.Salario" class="control-label"></label>
+                    <input asp-for="funcionario.Salario" class="form-control" />
+                    <span asp-validation-for="funcionario.Salario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="funcionario.GeneroID" class="control-label"></label>
+                    <select asp-for="funcionario.GeneroID" class="form-control">
+                        <option value="1">Masculino</option>
+                        <option value="2">Feminino</option>
+                    </select>
+                    <span asp-validation-for="funcionario.GeneroID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Atualizar" class="btn btn-primary btn-sm" /> | <a class="btn btn-secondary btn-sm" role="button" aria-pressed="true" asp-action="Index">Voltar</a>
+                </div>
+            </form>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        DataNascimento
+                    </th>
+                    <th>
+                        Genero
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.dependente)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataNascimento)
+                        </td>
+                        <td>
+                            @if (item.GeneroID == 1)
+                            {
+
+
+                                <p>Marculino</p>
+                            }
+                            else
+                            {
+                                <p>Feminino</p>
+                            }
+
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" role="button" aria-pressed="true" asp-action="AtualizarDependente" asp-route-id="@item.ID">Edit</a> |
+                            <a class="btn btn-primary" role="button" aria-pressed="true" asp-action="DeletarDependente" asp-route-id="@item.ID">Deletar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </div>
+
+
+</body>
+</html>
